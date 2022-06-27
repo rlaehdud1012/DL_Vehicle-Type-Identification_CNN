@@ -25,9 +25,13 @@ optimizer = 'adam'
 
 model = Sequential() # Sequential API 사용
 model.add(Conv2D(32, (3,3), activation = activation, kernel_initializer=initializer, input_shape = [128,128,1]) # 모수 : 32 x (3x3 +1) = 320; 사이즈는 126x126
+
 model.add(MaxPooling2D(2,2)) # 2x2 MaxPooling으로 이미지 사이즈는 반으로 줄음 63x63 노드는 32개로 유지
+
 model.add(Conv2D(64, (3,3), activation = activation, kernel_initializer = initializer, padding='same')) # 이미지 사이즈를 반으로 줄였기 때문에 노드를 2배 증가한 64개로 설정; padding='same' 옵션을 사용하여 원래의 크기 유지; size는 61x61; 모수 64x(32x9 +1) = 18496
+
 model.add(Maxpooling2D(2,2))
+
 model.add(Flatten()) # Flatten() 함수를 사용하여 1D 텐서로 재배치; 31x31x64 = 61504
 model.add(Dropout(dropout)) #정규화
 model.add(Dense(11, activation='softmax'))
